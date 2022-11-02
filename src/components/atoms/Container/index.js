@@ -8,4 +8,5 @@ import styled from 'styled-components/native'
   justify-content: ${({ justify }) => justify || 'flex-start'};
   margin-top: ${({ theme, marginTop }) => theme.metrics.px(marginTop || 0)}px;
   margin-left: ${({ theme, marginLeft }) => theme.metrics.px(marginLeft || 0)}px;
+  margin-right: ${({ theme, marginRight }) => theme.metrics.px(marginRight || 0)}px;
   `
