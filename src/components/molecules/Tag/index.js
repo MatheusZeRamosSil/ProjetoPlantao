@@ -20,5 +20,6 @@ const TagContainer = styled.View`
   height: ${({ theme }) => theme.metrics.px(18)}px;
   border-radius: ${({ theme }) => theme.metrics.px(60)}px;
   width: ${({ theme }) => theme.metrics.px(88)}px;
-  margin: ${({ theme, margin }) => theme.metrics.px(margin || 0)}px;
+  margin-top: ${({ theme, marginTop }) => theme.metrics.px(marginTop || 0)}px;
+  margin-left: ${({ theme, marginLeft }) => theme.metrics.px(marginLeft || 0)}px;
 `
