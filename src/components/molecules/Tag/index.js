@@ -1,15 +1,15 @@
 import styled from 'styled-components/native'
-import { Texto } from '../../atoms'
+import { Texto, FieldText } from '../../atoms'
 
 export const Tag = ({ children, ...props }) => {
-    return (
-        <TagContainer {...props}>
-        <Texto fontFamily="regular" size={14} color='white'>
-          {children}
-        </Texto>
-      </TagContainer>
-  
-    )
+  return (
+    <TagContainer {...props}>
+      <FieldText fontFamily="regular" size={14} color='white'>
+        {children}
+      </FieldText>
+    </TagContainer>
+
+  )
 }
 
 const TagContainer = styled.View`

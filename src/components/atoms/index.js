@@ -1,3 +1,3 @@
-export * from './Text';
-export * from './Avatar';
+export * from './Profile';
 export * from './Container';
+export * from './FieldText';

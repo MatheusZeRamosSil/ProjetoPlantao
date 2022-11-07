@@ -1,11 +1,11 @@
 import styled from 'styled-components/native';
-import { Texto } from '../../atoms'
+import { FieldText } from '../../atoms'
 
 
 export const CheckButton = () => {
     return (
       <PlayContainer>
-        <Texto fontFamily='regular' size={16}>Finalizar turno</Texto>
+        <FieldText fontFamily='regular' size={16}>Finalizar turno</FieldText>
       </PlayContainer>
     )
 }

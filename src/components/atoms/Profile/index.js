@@ -2,8 +2,7 @@ import { Avatar } from "@rneui/themed";
 import { StyleSheet } from "react-native";
 import styled from 'styled-components/native'
 import { Container } from "../Container";
-import { Texto } from "../Text";
-import { View } from "react-native";
+
 
 
 const sizes = {
@@ -24,20 +23,10 @@ export const Profile = ({ item, ...props }) => {
             <Avatar
                 size={size}
                 rounded
-                source={{ uri: url_image }}
+                //source={{ uri: url_image }}
+                title="D"
+                containerStyle={{ backgroundColor: "blue" }}
             />
-            <Container dir="column">
-                <Texto fontFamily="regular" 
-                       size={14}
-                       color='dark'
-                       marginLeft={12} >{children}</Texto>
-                
-                <Texto  fontFamily="regular"
-                        marginLeft={12}
-                        marginTop={4}
-                        size={12}
-                        color='gray'>{specialty}</Texto>
-            </Container>
         </Container>
 
 

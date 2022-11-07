@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
 
-export const Texto = ({children, ...props}) =>{
+export const FieldText = ({children, ...props}) =>{
     return <CustomText {...props}>{children}</CustomText>
 }
 const CustomText = styled.Text`
