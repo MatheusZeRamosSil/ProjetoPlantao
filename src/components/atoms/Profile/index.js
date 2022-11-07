@@ -1,6 +1,7 @@
 import { Avatar } from "@rneui/themed";
 import { StyleSheet } from "react-native";
 import styled from 'styled-components/native'
+import { theme } from "../../../styles";
 import { Container } from "../Container";
 
 
@@ -25,7 +26,7 @@ export const Profile = ({ item, ...props }) => {
                 rounded
                 //source={{ uri: url_image }}
                 title="D"
-                containerStyle={{ backgroundColor: "blue" }}
+                containerStyle={{ backgroundColor: theme.colors.gray }}
             />
         </Container>
 
