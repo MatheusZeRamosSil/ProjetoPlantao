@@ -5,7 +5,7 @@ import { FieldText } from '../../atoms'
 export const CheckButton = () => {
     return (
       <PlayContainer>
-        <FieldText fontFamily='regular' size={16}>Finalizar turno</FieldText>
+        <FieldText fontFamily='regular' size={14} color='white'>Make checking</FieldText>
       </PlayContainer>
     )
 }
@@ -16,7 +16,7 @@ const PlayContainer = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.gray};
-  border-radius: ${({ theme }) => theme.metrics.px(23)}px;
-  height: ${({ theme }) => theme.metrics.px(48)}px;
-  width: ${({ theme }) => theme.metrics.px(238)};
+  border-radius: ${({ theme }) => theme.metrics.px(6)}px;
+  height: ${({ theme }) => theme.metrics.px(63)}px;
+  width: ${({ theme }) => theme.metrics.px(333)};
 `

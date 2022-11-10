@@ -4,7 +4,7 @@ import { Container, FieldText } from "../../components/atoms";
 import { ScrollView } from "react-native";
 import { CheckButton, Tag } from "../../components/molecules";
 import { Map, InfoPlantao, InfoPreceptor, Title } from "../../components/organisms";
-
+import { ButtonsView } from "./style";
 const FAKE_DATA = [
     {
         name: 'Darth Vader',
@@ -39,6 +39,7 @@ export const Home = () => {
                 <Title fontFamily='regular'
                     size={12}
                     marginLeft={22}
+                    marginTop={12}
                     color='gray'>Preceptor</Title>
                 <InfoPreceptor
                     size={50}
@@ -47,44 +48,58 @@ export const Home = () => {
                         name: FAKE_DATA[0].name,
                         graduacao: FAKE_DATA[0].graduacao
                     }} />
-                <Title fontFamily='regular'
-                    size={12}
-                    marginLeft={22}
-                    marginTop={32}
-                    color='gray'>Equipe</Title>
+                
                 <Container
-                    marginTop={12}
-                    marginLeft={40}>
+                    marginTop={32}
+                    marginLeft={22}>
                     <Title fontFamily='regular'
                         size={12}
                         color='gray'>Estagiario</Title>
                     <Title fontFamily='regular'
-                        marginTop={4}
+                        marginTop={12}
                         size={14}
                         color='dark'>Maria Mostavaya</Title>
                 </Container>
                 <Container
                     dir='row'
-                    marginTop={12}
+                    marginTop={32}
                     marginLeft={22}>
                     <Container>
                         <Title fontFamily='regular'
                             size={12}
                             color='gray'>Data</Title>
                         <Title fontFamily='regular'
-                            marginTop={4}
+                            marginTop={12}
                             size={14}
                             color='dark'>Maria Mostavaya</Title>
                     </Container>
-                    <Container align='flex-end'>
+                    <Container marginLeft={62}>
                         <Title fontFamily='regular'
                             size={12}
-                            color='gray'>Data</Title>
+                            color='gray'>Horario</Title>
                         <Title fontFamily='regular'
-                            marginTop={4}
+                            marginTop={12}
                             size={14}
-                            color='dark'>Maria Mostavaya</Title>
+                            color='dark'>09:00 - 13:00</Title>
                     </Container>
+                </Container>
+                <Title fontFamily='regular'
+                    size={12}
+                    marginLeft={22}
+                    marginTop={32}
+                    color='gray'>Localização</Title>
+                <Container
+                    marginTop={12}
+                    marginLeft={30}>
+                    <Title fontFamily='regular'
+                        marginTop={4}
+                        size={14}
+                        color='dark'>Agape Medical Center</Title>
+                    <Title fontFamily='regular'
+                        size={10}
+                        marginTop={6}
+                        color='gray'>Lorem ipsum 19, st 13 sit amet, consectetur ...</Title>
+                    
                 </Container>
                 <Map />
                 <Container marginTop={20}
