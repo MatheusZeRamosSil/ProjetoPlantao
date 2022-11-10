@@ -8,20 +8,17 @@ export const InfoPreceptor = ({ infoPreceptor, size }) => {
     const { image_url, name, graduacao } = infoPreceptor
     return (
         <View>
-            <FieldText fontFamily="regular"
-                size={16}
-                marginLeft={32}
-                marginTop={12}>Preceptor</FieldText>
-            <Container dir='row' >
-
-
                 <Container dir='row'
                     align='center'
-                    marginLeft={34}
-                    marginTop={12}>
+                    marginLeft={26}
+                    marginTop={12}
+                    marginRight={26}
+                    border={6}
+                    padding={12}
+                    color='light_gray'>
                     <Profile
                         item={{ 
-                            size:80,
+                            size:size,
                             url_image: image_url }} />
 
                     <Container >
@@ -38,7 +35,6 @@ export const InfoPreceptor = ({ infoPreceptor, size }) => {
                     </Container>
 
                 </Container>
-            </Container>
         </View>
 
 

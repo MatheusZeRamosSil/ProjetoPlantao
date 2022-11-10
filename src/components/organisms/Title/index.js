@@ -1,8 +1,7 @@
 import { FieldText } from "../../atoms"
 
-export const Title = ({ children }) => {
+export const Title = ({ children, ...props }) => {
     return (
-        <FieldText fontFamily="lato_bold" size={24} color='ocean'
-        marginLeft={34} marginTop={50}> Boa tarde, {children}</FieldText>
+    <FieldText {...props}> {children}</FieldText>
     )
 }
