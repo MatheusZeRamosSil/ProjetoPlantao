@@ -4,7 +4,8 @@ import { Container, FieldText } from "../../components/atoms";
 import { ScrollView } from "react-native";
 import { CheckButton, Tag } from "../../components/molecules";
 import { Map, InfoPlantao, InfoPreceptor, Title } from "../../components/organisms";
-import { ButtonsView } from "./style";
+
+
 const FAKE_DATA = [
     {
         name: 'Darth Vader',
@@ -71,7 +72,7 @@ export const Home = () => {
                         <Title fontFamily='regular'
                             marginTop={12}
                             size={14}
-                            color='dark'>Maria Mostavaya</Title>
+                            color='dark'>Seg, 14 Novembro</Title>
                     </Container>
                     <Container marginLeft={62}>
                         <Title fontFamily='regular'

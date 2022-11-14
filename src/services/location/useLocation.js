@@ -2,6 +2,7 @@ import * as Location from 'expo-location';
 
 export const useLocation = () =>{
     const getPermissionLocationForeground = async() =>{
+       
         try{
             let {status} = await Location.requestForegroundPermissionsAsync();
             return status
