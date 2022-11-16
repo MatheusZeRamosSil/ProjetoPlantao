@@ -1,115 +1,115 @@
-import React from "react";
-import { View } from "react-native";
-import { Container, FieldText } from "../../components/atoms";
-import { ScrollView } from "react-native";
-import { CheckButton, Tag } from "../../components/molecules";
-import { Map, InfoPlantao, InfoPreceptor, Title } from "../../components/organisms";
-
-
-const FAKE_DATA = [
-    {
-        name: 'Darth Vader',
-        image_url: 'https://br.web.img3.acsta.net/newsv7/22/05/06/20/55/4497665.jpg',
-        nameLocal: 'Hospital Israelita Albert Einstein',
-        description: 'Hospital Israelita Albert Einstein 19, st 13 sit amet, consectetur ...',
-        sector: 'Setor : Pediatria, Bloco C12, 12º Andar ',
-        valor: 'R$1200,00',
-        graduacao: 'Lado sombrio',
-        data: 'Quarta-feira, 12 Outubro 2022',
-        horaInicio: '11:30 AM',
-        horaFim: '01:30 PM'
-    }
-]
+import React, { useState, useEffect } from 'react';
+import { View, ScrollView } from "react-native";
+import { Checkout } from "../../components/organisms";
+import { ActivityIndicator } from "react-native";
+import { Container, ImageCheck } from "../../components";
+import { FieldText } from '../../components';
+import { CheckButton } from "../../components/molecules";
 
 export const Home = () => {
-    return (
-        <View>
-            <ScrollView>
-                <Container align='center' marginTop={48}>
-                    <FieldText
-                        fontFamily="lato_bold"
-                        size={16}
-                        color='dark'>Plantão medico</FieldText>
-                    <FieldText
-                        fontFamily="lato_bold"
-                        size={16}
-                        color='dark'>Iniciando ...</FieldText>
-                </Container>
+    const [clickButtonCheckout, setButtonCheckout] = useState(false);
+    const [response, setResponse] = useState(null);
+    const [testCheckout, setTestCheckout] = useState(false);
+
+    const init = () => {
+        setTestCheckout(true);
+    }
+
+    const initButton = () => {
+        setButtonCheckout(true);
+    }
 
 
-                <Title fontFamily='regular'
-                    size={12}
-                    marginLeft={22}
-                    marginTop={12}
-                    color='gray'>Preceptor</Title>
-                <InfoPreceptor
-                    size={50}
-                    infoPreceptor={{
-                        image_url: FAKE_DATA[0].image_url,
-                        name: FAKE_DATA[0].name,
-                        graduacao: FAKE_DATA[0].graduacao
-                    }} />
-                
-                <Container
-                    marginTop={32}
-                    marginLeft={22}>
-                    <Title fontFamily='regular'
-                        size={12}
-                        color='gray'>Estagiario</Title>
-                    <Title fontFamily='regular'
-                        marginTop={12}
-                        size={14}
-                        color='dark'>Maria Mostavaya</Title>
-                </Container>
-                <Container
-                    dir='row'
-                    marginTop={32}
-                    marginLeft={22}>
-                    <Container>
-                        <Title fontFamily='regular'
-                            size={12}
-                            color='gray'>Data</Title>
-                        <Title fontFamily='regular'
-                            marginTop={12}
-                            size={14}
-                            color='dark'>Seg, 14 Novembro</Title>
+    useEffect(() => {
+       
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    if(testCheckout != false){
+        return (
+            <View>
+                <ScrollView>
+                    <Container align='center' marginTop={48}>
+                        <ImageCheck/>
+                        <Container align='center' marginTop={8}>
+                            <FieldText
+                                fontFamily="lato_bold"
+                                size={16}
+                                color='dark'>Plantão medico</FieldText>
+                            <FieldText
+                                fontFamily="lato_bold"
+                                size={16}
+                                color='dark'>Iniciado</FieldText>
+                        </Container>
                     </Container>
-                    <Container marginLeft={62}>
-                        <Title fontFamily='regular'
-                            size={12}
-                            color='gray'>Horario</Title>
-                        <Title fontFamily='regular'
-                            marginTop={12}
-                            size={14}
-                            color='dark'>09:00 - 13:00</Title>
+                    <Checkout />
+                    <Container marginTop={20}
+                        marginBottom={10}
+                        align='center'>
+                        <CheckButton />
                     </Container>
-                </Container>
-                <Title fontFamily='regular'
-                    size={12}
-                    marginLeft={22}
-                    marginTop={32}
-                    color='gray'>Localização</Title>
-                <Container
-                    marginTop={12}
-                    marginLeft={30}>
-                    <Title fontFamily='regular'
-                        marginTop={4}
-                        size={14}
-                        color='dark'>Agape Medical Center</Title>
-                    <Title fontFamily='regular'
-                        size={10}
-                        marginTop={6}
-                        color='gray'>Lorem ipsum 19, st 13 sit amet, consectetur ...</Title>
-                    
-                </Container>
-                <Map />
-                <Container marginTop={20}
-                    marginBottom={10}
-                    align='center'>
-                    <CheckButton />
-                </Container>
-            </ScrollView>
-        </View>
-    )
+                </ScrollView>
+            </View>
+        )
+    }
+
+    if (clickButtonCheckout != false && response == null) {
+        return (
+            <View>
+                <ScrollView>
+                    <Container align='center' marginTop={48}>
+                        <ActivityIndicator size="large" color="#0000ff" />
+                        <Container align='center' marginTop={8}>
+                            <FieldText
+                                fontFamily="lato_bold"
+                                size={16}
+                                color='dark'>Plantão medico</FieldText>
+                            <FieldText
+                                fontFamily="lato_bold"
+                                size={16}
+                                color='dark'>Iniciando ...</FieldText>
+                        </Container>
+                    </Container>
+                    <Checkout />
+                    <Container marginTop={20}
+                        marginBottom={10}
+                        align='center'>
+                        <CheckButton onPress={init}/>
+                    </Container>
+                </ScrollView>
+            </View>
+        )
+    }
+
+    if (clickButtonCheckout == false) {
+        return (
+            <View>
+                <ScrollView>
+                    <Container
+                        align='center'
+                        marginTop={48}>
+                        <FieldText
+                            fontFamily="lato_bold"
+                            size={16}
+                            color='dark'>Click no botão</FieldText>
+                        <FieldText
+                            fontFamily="lato_bold"
+                            size={16}
+                            color='dark'>para iniciar o plantão</FieldText>
+                        <Container marginTop={20}
+                        marginBottom={10}
+                        align='center'>
+                        <CheckButton onPress={initButton} />
+                    </Container>
+                    </Container>
+                    <View style={{opacity:0.2}}>
+                        <Checkout />
+                    </View>
+                   
+                </ScrollView>
+            </View>
+        )
+    }
+
 }
 

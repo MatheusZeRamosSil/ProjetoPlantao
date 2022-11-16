@@ -1,11 +1,13 @@
+import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
+import { InteractionManager } from 'react-native';
 import styled from 'styled-components/native';
 import { FieldText } from '../../atoms'
 
 
-export const CheckButton = () => {
+export const CheckButton = ({onPress}) => {
     return (
-      <PlayContainer>
-        <FieldText fontFamily='regular' size={14} color='white'>Make checking</FieldText>
+      <PlayContainer onPress = {onPress}>
+        <FieldText fontFamily='regular' size={14} color='white'>Fazer checking</FieldText>
       </PlayContainer>
     )
 }
