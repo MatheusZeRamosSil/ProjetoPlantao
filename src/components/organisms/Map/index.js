@@ -16,8 +16,6 @@ export const Map = () => {
         setLocation(locationCurrentDevice);
     }
 
-    console.log(location);
-
     useEffect(() => {
         initLocationCurrent();
         // eslint-disable-next-line react-hooks/exhaustive-deps
