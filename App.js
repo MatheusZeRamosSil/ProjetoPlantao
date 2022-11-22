@@ -1,7 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { useLocation } from './src/services/location';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import { useFonts } from 'expo-font';
 import {
@@ -17,8 +14,14 @@ import {
   Lato_900Black_Italic,
 } from '@expo-google-fonts/lato';
 import { Home } from './src/screens/HomeScreen/home';
+import {Login} from './src/screens/Login';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './src/styles';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Routes } from './src/routes';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -41,7 +44,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-     <Home/>
+      <Routes/>
     </ThemeProvider>
 
   );

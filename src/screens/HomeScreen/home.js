@@ -24,7 +24,6 @@ export const Home = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
-
     if (clickButtonCheckout == false) {
         return (
             <View>
@@ -43,7 +42,7 @@ export const Home = () => {
                         <Container marginTop={20}
                         marginBottom={10}
                         align='center'>
-                            <CheckButton onPress={initButton} />
+                            <CheckButton enableButton={false} onPress={initButton} />
                         </Container>
                     </Container>
                     <View style={{opacity:0.3}}>
@@ -63,12 +62,11 @@ export const Home = () => {
                         clickButtonCheckout:clickButtonCheckout,
                         testCheckout:testCheckout}}/>
             </Container>
-                    
                     <Checkout />
                       <Container marginTop={20}
                     marginBottom={10}
                     align='center'>
-                    <CheckButton onPress={init} />
+                    <CheckButton enableButton={false} onPress={init} />
                 </Container>
             </ScrollView>
         </View>

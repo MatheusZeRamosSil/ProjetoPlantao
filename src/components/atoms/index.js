@@ -1,4 +1,5 @@
 export * from './Profile';
 export * from './Container';
 export * from './FieldText';
-export * from './ImageCheck';
+export * from './ImageIcon';
+export * from './Input';

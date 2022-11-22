@@ -7,8 +7,8 @@ const sizes = {
     large: 48,
 }
 
-export const ImageCheck = ({ size }) => {
-    return < IconStyle source={check} size={sizes[size || 'large']} />
+export const ImageIcon = ({ icon,size }) => {
+    return < IconStyle source={icon} size={sizes[size || 'large']} />
 }
 
 export const IconStyle = styled.Image`

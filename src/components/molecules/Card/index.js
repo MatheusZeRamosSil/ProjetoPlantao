@@ -1,5 +1,6 @@
 import styled from 'styled-components/native'
-
+import plantaoIcon from '../../../../assets/plantaoIcon.png'
+import { ImageCheck } from '../../atoms'
 
 const sizes = {
     small: {
@@ -12,10 +13,13 @@ const sizes = {
     },
 }
 
-export const Card = ({ item, size }) => {
+export const Card = ({ color,props, size }) => {
     return (
-        <CardContainer size={size ? sizes[size] : sizes.small}>
-            <CardImage source={{ uri: item.image_url }} />
+        <CardContainer size={size ? sizes[size] : sizes.small}
+                        color={color}
+        >
+            <ImageCheck/>
+            <CardImage source={plantaoIcon} />
         </CardContainer>
     )
 }
@@ -25,6 +29,7 @@ const CardContainer = styled.View`
   width: ${({ theme, size }) => theme.metrics.px(size.w)}px;
   height: ${({ theme, size }) => theme.metrics.px(size.h)}px;
   border-radius: ${({ theme }) => theme.metrics.px(10)}px;
+  background-color: ${({ color, theme }) => theme.colors[color || 'gray']};
   overflow: hidden;
   margin-right: ${({ theme }) => theme.metrics.px(12)}px;
 `

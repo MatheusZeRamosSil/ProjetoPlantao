@@ -1,6 +1,7 @@
 import { ActivityIndicator, View } from "react-native";
 import { Container, FieldText } from "../../atoms";
-import { ImageCheck } from "../../atoms";
+import { ImageIcon } from "../../atoms";
+import check from '../../../../assets/check.png';
 
 export const State = ({ props }) => {
     const { clickButtonCheckout, testCheckout } = props
@@ -11,7 +12,7 @@ export const State = ({ props }) => {
 
 
             <Container align='center'>
-                <ImageCheck />
+                <ImageIcon icon={check}/>
                 <FieldText
                     fontFamily="lato_bold"
                     size={16}
