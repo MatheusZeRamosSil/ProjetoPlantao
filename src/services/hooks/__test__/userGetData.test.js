@@ -7,20 +7,22 @@ var axiosMock = new MockAdapter(axios);
 
 
 it('get mock data', async () => {
+                    
+    var mockInterno = {
+                        id: 1,
+                        nome: "Interno1",
+                        email: "interno1@gmail.com",
+                        rgm: "11111111",
+                        telefone: "83 111111111",
+                        graduacao: "Fisioterapia",
+                        periodoInterno: "P10",
+                        senha: "$2a$10$1sycIQA0yGH0Hh8JIhb.SOymM7ojt8vCpEy6ruM5w.MzqQDVzwvc2",
+                        equipe: null
+    };
 
-    var dataUsers = {id: 1, 
-                    nome: "Teresa de Calcutá",
-                    email:"calcuta@gmail.com",
-                    rgm: 123456,
-                    telefone: "8399995555",
-                    dataNascimento:"1970-01-01T06:23:41.980+00:00",
-                    senha:"321654",
-                    preceptor:null,
-                    cpf:"12345678900"};
-
-    axiosMock.onGet().reply(200,dataUsers)
+    axiosMock.onGet().reply(200,mockInterno)
     const resultJson =  await useGetData().getUser(1)
-    expect(resultJson).toEqual(dataUsers);
+    expect(resultJson).toEqual(mockInterno);
 });
 
 it('create a new user', async () => {
@@ -28,41 +30,38 @@ it('create a new user', async () => {
         id:5
     };
 
-    var newUserFake = {
-        "nome":"Marcos",
-        "email":"test@test2.com",
-        "rgm":6455467,
-        "telefone":"8799999911",
-        "dataNascimento":"2000-07-05",
-        "senha":"345690",
-        "preceptor":null,
-        "cpf":"99999999"
+    var newUserFake ={
+       
+        email: "interno7@gmail.com",
+        graduacao: 1,
+        nome: "Interno7",
+        periodoInterno: 2,
+        rgm: "12345777",
+        senha: "interno7",
+        telefone: "83 111111111",   
     };
 
-    axiosMock.onPost().reply(200, responseMock)
-    const resultJson = await useGetData().createNewUser(7,newUserFake)
+    axiosMock.onPost().reply(201, newUserFake)
+    const resultJson = await useGetData().createNewUser(newUserFake)
     expect(resultJson).toEqual(201)
 
 });
 
 it('update data user', async () => {
-    var mockedUser = {
-        nome:"Teste"
-    }
+   
 
-    var fakeUpdateUser = {
-        "nome":"Agostinho Hipona",
-        "email":"agostinho@hipona.com",
-        "rgm":6455467,
-        "telefone":"8799999912",
-        "dataNascimento":"1354-07-05",
-        "senha":"345690",
-        "preceptor":null,
-        "cpf":"99999999"
-    }
+    var fakeUpdateUser ={
+        nome: "Inet teste",
+        email: "interno4@gmail.com",
+        rgm: "44444444",
+        telefone: "83 121212121",
+        graduacao: "0",
+        periodoInterno: "3",
+        senha: "interno4"
+    };
 
-    axiosMock.onPut().reply(204,mockedUser)
-    const result = await useGetData().updateUserData(3,fakeUpdateUser)
+    axiosMock.onPut().reply(200,fakeUpdateUser)
+    const result = await useGetData().updateUserData(44444444,fakeUpdateUser)
     expect(result).toEqual(200)
 });
 

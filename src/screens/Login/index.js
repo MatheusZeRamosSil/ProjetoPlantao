@@ -1,4 +1,4 @@
-import { View, Linking } from "react-native"
+import { View} from "react-native"
 import React, { useState, useEffect } from 'react'
 import {
     Container,
@@ -15,12 +15,16 @@ export const Login = ({ navigation }) => {
     return (
         <View>
             <Container marginTop={150} marginLeft={24}>
-                <Title>Login</Title>
+                <Title
+                   fontFamily="lato_bold"
+                   color="ocean"
+                   size={32} 
+                >Login</Title>
                 <FieldText
                     marginTop={8}
                     fontFamily="regular"
                     color="ocean"
-                    size={12}
+                    size={14}
                 >
                     Faça o login para continuar
                 </FieldText>
@@ -40,13 +44,14 @@ export const Login = ({ navigation }) => {
                             onChangeText={(text) => setQuery(text)}
                             placeholder="Password"
                         />
-                        <Button>Sign in</Button>
+                        <Button onPress={() => navigation.navigate('Home')}
+                               >Sign in</Button>
                         <Container dir="row" marginTop={12}>
                             <FieldText
                                 marginTop={8}
                                 fontFamily="regular"
                                 color="ocean"
-                                size={12}
+                                size={16}
                             >
                                 Não é cadastrado?{" "}
                             </FieldText>
@@ -54,7 +59,7 @@ export const Login = ({ navigation }) => {
                                 marginTop={8}
                                 fontFamily="lato_bold"
                                 color="ocean"
-                                size={12}
+                                size={16 }
                                 onPress={() => navigation.navigate('RegisterProfile')}
                             >
                                 Fazer cadastro

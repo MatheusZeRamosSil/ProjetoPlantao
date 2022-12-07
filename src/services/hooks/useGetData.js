@@ -3,7 +3,7 @@ import {api} from '../api'
 export const useGetData = () =>{
     const getUser = async(id) => {
         try{
-            const response = await api.get(`/${id}`)
+            const response = await api.get(`listar/id/${id}`)
             return response.data
         }catch(error){
             console.log({error})
@@ -13,16 +13,18 @@ export const useGetData = () =>{
 
     const createNewUser = async(data) => {
         try{
-            const postResponse = await api.post('/',data)
+           
+            const postResponse = await api.post('cadastrar/',data)
             return postResponse.status
         }catch(error){
-            return {error}
+            return error.message
         }
     }
 
-    const updateUserData = async(id,data) => {
+    const updateUserData = async(rgm,data) => {
         try{
-            const result = await api.put(`/${id}/`,data)
+            console.log(data);
+            const result = await api.put(`rgm/${rgm}`,data)
             return result.status
         }catch(error){
             return {error}

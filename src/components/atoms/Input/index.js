@@ -1,10 +1,16 @@
 import styled from 'styled-components/native'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import React, { useState, useEffect } from 'react'
 
+export const Input = (props, password, iconName) =>{
 
-export const Input = (props) =>{
+  const [hidePassword, setHidePassword] = React.useState(password);
+
     return(
         <InputContainer {...props}>
-            <TextInput {...props}/>
+            <TextInput {...props}
+                       
+            />
         </InputContainer>
     )
 }
@@ -13,6 +19,7 @@ const InputContainer = styled.View`
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+  flex-direction: ${({ dir }) => dir || 'row'};
   width: ${({ theme }) => theme.metrics.px(256)}px;
   height: ${({ theme }) => theme.metrics.px(42)}px;
   border-radius: ${({ theme }) => theme.metrics.px(4)};
@@ -29,7 +36,7 @@ const TextInput = styled.TextInput.attrs(({ theme }) => ({
   placeholderTextColor: theme.colors.ocean,
 }))`
   height: 100%;
-  width: 100%;
+  width: 90%;
   font-family: ${({ theme }) => theme.fonts.regular};
   color: ${({ theme }) => theme.colors.ocean};
   font-size: ${({ theme }) => theme.metrics.px(10)}px;

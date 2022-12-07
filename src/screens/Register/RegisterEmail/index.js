@@ -1,6 +1,6 @@
 import { View } from 'react-native'
-import styled from 'styled-components/native'
-import React, { useState, useEffect } from 'react'
+import React, { useState,useEffect } from 'react'
+import { useGetData } from '../../../services/hooks/useGetData'
 import {
     Container,
     FieldText,
@@ -8,15 +8,55 @@ import {
     Input,
     Button
 } from "../../../components"
+import { useRoute } from '@react-navigation/native'
 
-export const RegisterEmail = () => {
-    const [query, setQuery] = useState('')
-    return(
+export const RegisterEmail = ({ navigation }) => {
+    const route = useRoute();
+    const {createNewUser} = useGetData()
+    const [click, setClick] = useState(false)
+
+    const [inputs, setInputs] = React.useState({
+        nome: route.params.inputs.nome,
+        rgm: route.params.inputs.rgm,
+        graduacao: route.params.inputs.curso,
+        periodoInterno: route.params.inputs.periodo,
+        email:'',
+        senha:'',
+        telefone:''
+      });
+
+      const registerNewUser = async () =>{
+        const result = await useGetData().createNewUser(inputs)
+ 
+        console.log(result)
+        if(result == 201){
+            navigation.navigate('Home')
+
+        }
+      }
+
+      const onSubmit = async() => {
+       
+    }
+      const handleOnchange = (text, input) => {
+        setInputs(prevState => ({...prevState, [input]: text}));
+      };
+
+    useEffect(() => {
+        if(click){
+            registerNewUser()
+        }
+    },[click])
+    return (
         <View>
             <Container marginTop={120}
-                       marginLeft={24}>
-                    <Title>Cadastro</Title>
-                    <FieldText
+                marginLeft={24}>
+                <Title
+                    fontFamily="lato_bold"
+                    color="ocean"
+                    size={32}
+                >Cadastro</Title>
+                <FieldText
                     marginTop={8}
                     fontFamily="regular"
                     color="ocean"
@@ -29,17 +69,23 @@ export const RegisterEmail = () => {
                 align="center">
                 <Input
                     mb={24}
-                    value={query}
-                    onChangeText={(text) => setQuery(text)}
+                    value={inputs.telefone}
+                    onChangeText={(text) => handleOnchange(text,'telefone')}
+                    placeholder="Telefone"
+                />
+                <Input
+                    mb={24}
+                    value={inputs.email}
+                    onChangeText={(text) => handleOnchange(text,'email')}
                     placeholder="Email"
                 />
-                   <Input
+                <Input
                     mb={24}
-                    value={query}
-                    onChangeText={(text) => setQuery(text)}
+                    value={inputs.senha}
+                    onChangeText={(text) => handleOnchange(text,'senha')}
                     placeholder="Senha"
                 />
-                 <Button>Proximo</Button>
+                <Button onPress={()=> setClick(true)}>Proximo</Button>
             </Container>
         </View>
     )

@@ -6,4 +6,5 @@ export const colors = {
     light_gray:'#EDEDED',
     orange:'#FFAB00',
     coffe:'#39210B',
+    red:'#D50000',
   }
