@@ -9,19 +9,18 @@ var axiosMock = new MockAdapter(axios);
 it('get mock data', async () => {
                     
     var mockInterno = {
-                        id: 1,
-                        nome: "Interno1",
-                        email: "interno1@gmail.com",
-                        rgm: "11111111",
-                        telefone: "83 111111111",
-                        graduacao: "Fisioterapia",
-                        periodoInterno: "P10",
-                        senha: "$2a$10$1sycIQA0yGH0Hh8JIhb.SOymM7ojt8vCpEy6ruM5w.MzqQDVzwvc2",
-                        equipe: null
-    };
+        "id": 2,
+        "nome": "Matheus ",
+        "email": "matheuszeramossilva2000@gmail.com",
+        "rgm": "26581337",
+        "telefone": "87999690335",
+        "graduacao": "Fisioterapia",
+        "periodoInterno": "P12",
+        "equipe": null
+    }
 
     axiosMock.onGet().reply(200,mockInterno)
-    const resultJson =  await useGetData().getUser(1)
+    const resultJson =  await useGetData().getUser(26581337)
     expect(resultJson).toEqual(mockInterno);
 });
 

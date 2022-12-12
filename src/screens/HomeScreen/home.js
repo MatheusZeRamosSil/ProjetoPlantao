@@ -4,12 +4,18 @@ import { Checkout, State } from "../../components/organisms";
 import { Container} from "../../components";
 import { FieldText } from '../../components';
 import { CheckButton } from "../../components/molecules";
+import { useRoute } from '@react-navigation/native'
+
 
 export const Home = () => {
+    const route = useRoute();
     const [clickButtonCheckout, setButtonCheckout] = useState(false);
-    const [response, setResponse] = useState(null);
     const [testCheckout, setTestCheckout] = useState(false);
-
+    console.log(route.params.result.nome)
+    var dataInterno ={
+        nome: route.params.result.nome,
+        
+    }
     const init = () => {
         setTestCheckout(true);
     }
@@ -62,7 +68,7 @@ export const Home = () => {
                         clickButtonCheckout:clickButtonCheckout,
                         testCheckout:testCheckout}}/>
             </Container>
-                    <Checkout />
+                    <Checkout nameInterno={dataInterno.nome}/>
                       <Container marginTop={20}
                     marginBottom={10}
                     align='center'>

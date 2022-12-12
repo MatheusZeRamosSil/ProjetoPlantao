@@ -134,9 +134,9 @@ export const RegisterProfile = ({ navigation }) => {
                    
                     >
                     <Picker.Item label="Curso"/>
-                    <Picker.Item label="Enfermagem" value="0" />
-                    <Picker.Item label="Medicina" value="1" />
-                    <Picker.Item label="Fisioterapia" value="2" />
+                    <Picker.Item label="Enfermagem" value={0} />
+                    <Picker.Item label="Medicina" value={1} />
+                    <Picker.Item label="Fisioterapia" value={2} />
                 </Picker>
                 </InputContainer>
                 </Container>
@@ -150,9 +150,9 @@ export const RegisterProfile = ({ navigation }) => {
                        handleOnchange(itemValue,'periodo')
                     }>
                     <Picker.Item label="Periodo"/>
-                    <Picker.Item label="P1" value="1" />
-                    <Picker.Item label="P2" value="2" />
-                    <Picker.Item label="P3" value="3" />
+                    <Picker.Item label="P1" value={1} />
+                    <Picker.Item label="P2" value={2} />
+                    <Picker.Item label="P3" value={3} />
                 </Picker>
                 </InputContainer>
                 </Container>

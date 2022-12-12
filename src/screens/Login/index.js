@@ -7,11 +7,35 @@ import {
     Input,
     Button
 } from "../../components"
-
+import { useGetData } from "../../services/hooks/useGetData"
 
 export const Login = ({ navigation }) => {
-    const [query, setQuery] = useState('')
+   
+    const [input, setInput]= useState({
+    rgm:'',
+    senha:''
+   })
+    
+   const {getUser} = useGetData()
+   const [click, setClick] = useState(false)
 
+    const handleOnchange = (text, input) => {
+        setInput(prevState => ({...prevState, [input]: text}));
+    };
+
+    const login= async () => {
+        const result = await getUser(input.rgm)
+        console.log(result)
+        if (result != null){
+            navigation.navigate('Home', {result})
+        }
+    }
+
+    useEffect(() => {
+        if(click){
+            login()
+        }
+    },[click])
     return (
         <View>
             <Container marginTop={150} marginLeft={24}>
@@ -34,17 +58,17 @@ export const Login = ({ navigation }) => {
                         marginTop={38}>
                         <Input
                             mb={24}
-                            value={query}
-                            onChangeText={(text) => setQuery(text)}
+                            value={input.rgm}
+                            onChangeText={(text) => handleOnchange(text,'rgm')}
                             placeholder="RGM"
                         />
                         <Input
                             mb={24}
-                            value={query}
-                            onChangeText={(text) => setQuery(text)}
+                            value={input.senha}
+                            onChangeText={(text) => handleOnchange(text,'senha')}
                             placeholder="Password"
                         />
-                        <Button onPress={() => navigation.navigate('Home')}
+                        <Button onPress={() => setClick(true)}
                                >Sign in</Button>
                         <Container dir="row" marginTop={12}>
                             <FieldText

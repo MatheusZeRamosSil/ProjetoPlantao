@@ -24,20 +24,20 @@ export const RegisterEmail = ({ navigation }) => {
         senha:'',
         telefone:''
       });
-
+      
+      console.log(inputs)
       const registerNewUser = async () =>{
+        
         const result = await useGetData().createNewUser(inputs)
+       
  
         console.log(result)
         if(result == 201){
-            navigation.navigate('Home')
+            navigation.navigate('Login')
 
         }
       }
 
-      const onSubmit = async() => {
-       
-    }
       const handleOnchange = (text, input) => {
         setInputs(prevState => ({...prevState, [input]: text}));
       };

@@ -1,9 +1,9 @@
 import {api} from '../api'
 
 export const useGetData = () =>{
-    const getUser = async(id) => {
+    const getUser = async(rgm) => {
         try{
-            const response = await api.get(`listar/id/${id}`)
+            const response = await api.get(`listar/${rgm}`)
             return response.data
         }catch(error){
             console.log({error})

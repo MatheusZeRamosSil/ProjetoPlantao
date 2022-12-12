@@ -21,7 +21,7 @@ const FAKE_DATA = [
     }
 ]
 
-export const Checkout = () =>{
+export const Checkout = ({nameInterno}) =>{
     return (
         <View>
                 <Title fontFamily='regular'
@@ -46,7 +46,7 @@ export const Checkout = () =>{
                     <Title fontFamily='regular'
                         marginTop={12}
                         size={14}
-                        color='dark'>Maria Mostavaya</Title>
+                        color='dark'>{nameInterno}</Title>
                 </Container>
                 <Container
                     dir='row'
