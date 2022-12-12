@@ -9,39 +9,62 @@ import {
     CircleAvatar
 } from "../../../components"
 import iconDoctor from '../../../../assets/doctor.png'
-import { useForm, Controller } from "react-hook-form";
 import styled from 'styled-components/native';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import { Picker } from '@react-native-picker/picker';
-import {theme} from '../../../styles/theme';
+import { theme } from '../../../styles/theme';
+import { Keyboard } from "react-native";
 
-
-const schema = yup.object({
-    firstName: yup.string().required("Adicione seu nome"),
-    registerMatricula: yup.number().positive("Valor invalido").integer().min(8, "Numero de caracteres insuficiente").required("Adicione seu RGM")
-})
 
 export const RegisterProfile = ({ navigation }) => {
-        
+
     const [inputs, setInputs] = React.useState({
         nome: '',
         rgm: '',
         curso: '',
         periodo: '',
-      });
-
-    const { control, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(schema)
     });
 
-    const onSubmit = () => {
-        console.log(inputs)
+    const [errors, setErrors] = useState({});
+
+    const validate = () => {
+        Keyboard.dismiss();
+        let isValid = true;
+
+        if (!inputs.nome) {
+            handleError('Por favor insira o nome', 'nome');
+            isValid = false;
+        }
+
+        if (!inputs.rgm) {
+            handleError('Por favor insira o rgm', 'rgm');
+            isValid = false;
+        }else if(!inputs.rgm.match(/[0-9]/)){
+            handleError('Deve ser do tipo numerico', 'rgm');
+            isValid = false;
+        }
+
+
+        if (inputs.periodo == false) {
+            handleError('Por favor escolha o periodo do seu curso', 'periodo');
+            isValid = false;
+        }
+
+        if (inputs.curso == false) {
+            handleError('Por favor escolha o curso de sua graduacão', 'curso')
+        }
+
+        if(isValid){
+            navigation.navigate('RegisterEmail', {inputs})
+        }
     }
 
     const handleOnchange = (text, input) => {
-        setInputs(prevState => ({...prevState, [input]: text}));
-      };
+        setInputs(prevState => ({ ...prevState, [input]: text }));
+    };
+
+    const handleError = (error, input) => {
+        setErrors(prevState => ({ ...prevState, [input]: error }));
+    };
     return (
         <View>
             <ScrollView>
@@ -68,96 +91,93 @@ export const RegisterProfile = ({ navigation }) => {
                 <Container marginTop={12}
                     align="center">
                     <Container marginBottom={16}>
-                        <Controller
-                            name="firstName"
-                            control={control}
-                            rules={{
-                                required: true,
-                            }}
-                            render={({ field: { onChange, onBlur, value } }) => (
-                                <Input
-                                    onChangeText={text => handleOnchange(text,'nome')}
-                                    onBlur={onBlur}
-                                    value={value}
-                                    placeholder="Nome"
-                                />
-                            )}
+
+                        <Input
+                            onChangeText={text => handleOnchange(text, 'nome')}
+                            onFocus={() => handleError(null, 'nome')}
+                            value={inputs.nome}
+                            placeholder="Nome"
                         />
-                        {errors.firstName && <FieldText
+
+                        {errors.nome && <FieldText
                             marginTop={8}
                             fontFamily="regular"
                             color="red"
-                            size={12}>{errors.firstName?.message}</FieldText>}
+                            size={12}>{errors.nome}</FieldText>}
                     </Container>
                 </Container>
                 <Container marginTop={12}
                     align="center">
 
                     <Container marginBottom={16}>
-                        <Controller
-                            name="registerMatricula"
-                            control={control}
-                            rules={{
-                                required: true,
-                            }}
-                            render={({ field: { onChange, onBlur, value } }) => (
-                                <Input
-                                    onChangeText={text => handleOnchange(text,'rgm')}
-                                    onBlur={onBlur}
-                                    value={value}
-                                    placeholder="RGM"
-                                />
-                            )}
+
+                        <Input
+                            onChangeText={text => handleOnchange(text, 'rgm')}
+                            value={inputs.rgm}
+                            placeholder="RGM"
                         />
-
-                    </Container>
-                </Container>
-
-                <Container marginBottom={16}
-                    marginLeft={50}>
-                    {errors.registerMatricula && <FieldText
+                    {errors.rgm && <FieldText
                         marginTop={8}
                         fontFamily="regular"
                         color="red"
-                        size={12}>{errors.registerMatricula?.message}</FieldText>}
+                        size={12}>{errors.rgm}</FieldText>}
+                    </Container>
                 </Container>
-               
-                <Container marginBottom={28}
+                
+                <Container 
+                    marginTop={12}
+                    marginBottom={12}
                     marginLeft={50} >
-                <InputContainer>
-                <Picker
-                    style={styles.container}
-                    selectedValue={inputs.curso}
-                    onValueChange={(itemValue) =>
-                        handleOnchange(itemValue,'curso')
-                    }
-                   
-                    >
-                    <Picker.Item label="Curso"/>
-                    <Picker.Item label="Enfermagem" value={0} />
-                    <Picker.Item label="Medicina" value={1} />
-                    <Picker.Item label="Fisioterapia" value={2} />
-                </Picker>
-                </InputContainer>
+                    <InputContainer>
+                        <Picker
+                            style={styles.container}
+                            selectedValue={inputs.curso}
+                            onFocus={() => handleError(null, 'curso')}
+                            onValueChange={(itemValue) =>
+                                handleOnchange(itemValue, 'curso')
+                            }
+
+                        >
+                            <Picker.Item label="Curso" value={false} />
+                            <Picker.Item label="Enfermagem" value={0} />
+                            <Picker.Item label="Medicina" value={1} />
+                            <Picker.Item label="Fisioterapia" value={2} />
+                        </Picker>
+                    </InputContainer>
+                    {errors.curso && <FieldText
+                            marginTop={8}
+                            fontFamily="regular"
+                            color="red"
+                            size={12}>{errors.curso}</FieldText>}
                 </Container>
-                <Container marginBottom={16}
+                <Container 
+                    marginTop={12}
+                    marginBottom={12}
                     marginLeft={50} >
-                <InputContainer>
-                <Picker
-                    style={styles.container}
-                    selectedValue={inputs.periodo}
-                    onValueChange={(itemValue) =>
-                       handleOnchange(itemValue,'periodo')
-                    }>
-                    <Picker.Item label="Periodo"/>
-                    <Picker.Item label="P1" value={1} />
-                    <Picker.Item label="P2" value={2} />
-                    <Picker.Item label="P3" value={3} />
-                </Picker>
-                </InputContainer>
+                    <InputContainer>
+                        <Picker
+                            style={styles.container}
+                            selectedValue={inputs.periodo}
+                            onValueChange={(itemValue) =>
+                                handleOnchange(itemValue, 'periodo')
+                            }>
+                            <Picker.Item label="Periodo" value={false} />
+                            <Picker.Item label="P1" value={1} />
+                            <Picker.Item label="P2" value={2} />
+                            <Picker.Item label="P3" value={3} />
+                        </Picker>
+                    </InputContainer>
+                    {errors.periodo && <FieldText
+                            marginTop={8}
+                            fontFamily="regular"
+                            color="red"
+                            size={12}>{errors.periodo}</FieldText>}
                 </Container>
-                <Container align="center">
-                    <Button onPress={() => navigation.navigate('RegisterEmail', {inputs})}>Proximo</Button>
+                <Container 
+                   marginTop={12} 
+                   marginBottom={12}
+                   align="center">
+                    <Button onPress={() => validate()}>Proximo</Button>
                 </Container>
             </ScrollView>
         </View>
@@ -183,8 +203,8 @@ const InputContainer = styled.View`
 
 const styles = StyleSheet.create({
     container: {
-        width:'100%',
-        borderColor:theme.colors.ocean,
+        width: '100%',
+        borderColor: theme.colors.ocean,
         borderWidth: 5,
     },
 });
