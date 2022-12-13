@@ -16,6 +16,7 @@ export const Login = ({ navigation }) => {
     const [click, setClick] = useState(false)
     const [errors, setErrors] = useState({});
 
+    const [nome, setNome] = useState('oi');
     const [input, setInput]= useState({
         rgm:'',
         senha:''
@@ -23,13 +24,14 @@ export const Login = ({ navigation }) => {
 
    
     const validate = () =>{
+        
         Keyboard.dismiss()
         let isValid = true;
 
         if (!input.rgm) {
             handleError('Por favor insira o rgm', 'rgm');
             isValid = false;
-        }else if(!input.rgm.match(/[0-9]/)){
+        }else if(!input.rgm.match(/^[0-9]+$/)){
             handleError('Deve ser do tipo numerico', 'rgm');
             isValid = false;
         }
@@ -43,11 +45,12 @@ export const Login = ({ navigation }) => {
             setClick(true)
         }
     }
-  
-
-    const handleOnchange = (text, input) => {
-        setInput(prevState => ({...prevState, [input]: text}));
-    };
+   
+   
+    
+    const handleOnchange = (text, name) => {
+        setInput(prevState => ({...prevState, [name]: text}));
+      };
 
     const handleError = (error, input) => {
         setErrors(prevState => ({ ...prevState, [input]: error }));
@@ -66,6 +69,7 @@ export const Login = ({ navigation }) => {
             login()
         }
     },[click])
+   
     return (
         <View>
             <Container marginTop={150} marginLeft={24}>
@@ -85,41 +89,26 @@ export const Login = ({ navigation }) => {
             </Container>
             <Container marginTop={20}
                     align="center">
-                    <Container marginBottom={16}>
-
-                        <Input
-                            onChangeText={text => handleOnchange(text, 'rgm')}
+                    <Input
+                            onChangeText={(text) => handleOnchange(text, 'rgm')}
                             onFocus={() => handleError(null, 'rgm')}
                             value={input.rgm}
+                            error={errors.rgm}
                             placeholder="RGM"
-                        />
-
-                        {errors.rgm && <FieldText
-                            marginTop={8}
-                            fontFamily="regular"
-                            color="red"
-                            size={12}>{errors.rgm}</FieldText>}
-                    </Container>
-                </Container>
-                <Container marginTop={12}
-                    align="center">
-                    <Container marginBottom={16}>
-
-                        <Input
-                            onChangeText={text => handleOnchange(text, 'senha')}
+                    />
+                     <Input
+                            marginTop={20}
+                            onChangeText={text => handleOnchange({text}, 'senha')}
                             onFocus={() => handleError(null, 'senha')}
                             value={input.senha}
-                            placeholder="senha"
-                        />
-
-                        {errors.senha && <FieldText
-                            marginTop={8}
-                            fontFamily="regular"
-                            color="red"
-                            size={12}>{errors.senha}</FieldText>}
-                    </Container>
+                            error={errors.senha}
+                            placeholder="Senha"
+                            password
+                    />
                 </Container>
-                <Container align="center">
+                <Container 
+                   marginTop={16}
+                   align="center">
                 <Button onPress={() => validate()}>Sign in</Button>
                 <Container dir="row" marginTop={12}>
                             <FieldText

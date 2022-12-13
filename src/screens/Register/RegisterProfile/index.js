@@ -1,4 +1,4 @@
-import { View, ScrollView, StyleSheet } from "react-native"
+import { View, ScrollView} from "react-native"
 import React, { useState } from 'react'
 import {
     Container,
@@ -6,13 +6,25 @@ import {
     Title,
     Input,
     Button,
-    CircleAvatar
+    CircleAvatar,
+    SelectedItens
 } from "../../../components"
 import iconDoctor from '../../../../assets/doctor.png'
-import styled from 'styled-components/native';
-import { Picker } from '@react-native-picker/picker';
-import { theme } from '../../../styles/theme';
 import { Keyboard } from "react-native";
+
+const curso = [
+    {nome:"Cursos", value:false},
+    {nome:"Enfermagem",value:0},
+    {nome:"Medicina",value:1},
+    {nome:"Fisioterapia",value:2}
+]
+
+const periodo = [
+    {nome:"Periodo", value:false},
+    {nome:"P1",value:1},
+    {nome:"P2",value:2},
+    {nome:"P3",value:3},
+]
 
 
 export const RegisterProfile = ({ navigation }) => {
@@ -38,7 +50,7 @@ export const RegisterProfile = ({ navigation }) => {
         if (!inputs.rgm) {
             handleError('Por favor insira o rgm', 'rgm');
             isValid = false;
-        }else if(!inputs.rgm.match(/[0-9]/)){
+        }else if(!inputs.rgm.match(/^[0-9]+$/)){
             handleError('Deve ser do tipo numerico', 'rgm');
             isValid = false;
         }
@@ -53,11 +65,13 @@ export const RegisterProfile = ({ navigation }) => {
             handleError('Por favor escolha o curso de sua graduacão', 'curso')
         }
 
+        
         if(isValid){
             navigation.navigate('RegisterEmail', {inputs})
         }
     }
-
+    
+    console.log(inputs)
     const handleOnchange = (text, input) => {
         setInputs(prevState => ({ ...prevState, [input]: text }));
     };
@@ -65,6 +79,8 @@ export const RegisterProfile = ({ navigation }) => {
     const handleError = (error, input) => {
         setErrors(prevState => ({ ...prevState, [input]: error }));
     };
+
+    
     return (
         <View>
             <ScrollView>
@@ -90,88 +106,40 @@ export const RegisterProfile = ({ navigation }) => {
                 </Container>
                 <Container marginTop={12}
                     align="center">
-                    <Container marginBottom={16}>
 
-                        <Input
+                    <Input
                             onChangeText={text => handleOnchange(text, 'nome')}
                             onFocus={() => handleError(null, 'nome')}
                             value={inputs.nome}
+                            error={errors.nome}
                             placeholder="Nome"
-                        />
-
-                        {errors.nome && <FieldText
-                            marginTop={8}
-                            fontFamily="regular"
-                            color="red"
-                            size={12}>{errors.nome}</FieldText>}
-                    </Container>
-                </Container>
-                <Container marginTop={12}
-                    align="center">
-
-                    <Container marginBottom={16}>
-
-                        <Input
-                            onChangeText={text => handleOnchange(text, 'rgm')}
+                    />
+                    <Input  
+                            marginTop={16}
+                            onChangeText={text =>  handleOnchange(text, 'rgm')}
+                            onFocus={() => handleError(null, 'rgm')}
                             value={inputs.rgm}
+                            error={errors.rgm}
                             placeholder="RGM"
-                        />
-                    {errors.rgm && <FieldText
-                        marginTop={8}
-                        fontFamily="regular"
-                        color="red"
-                        size={12}>{errors.rgm}</FieldText>}
-                    </Container>
-                </Container>
-                
-                <Container 
-                    marginTop={12}
-                    marginBottom={12}
-                    marginLeft={50} >
-                    <InputContainer>
-                        <Picker
-                            style={styles.container}
-                            selectedValue={inputs.curso}
-                            onFocus={() => handleError(null, 'curso')}
-                            onValueChange={(itemValue) =>
-                                handleOnchange(itemValue, 'curso')
-                            }
-
-                        >
-                            <Picker.Item label="Curso" value={false} />
-                            <Picker.Item label="Enfermagem" value={0} />
-                            <Picker.Item label="Medicina" value={1} />
-                            <Picker.Item label="Fisioterapia" value={2} />
-                        </Picker>
-                    </InputContainer>
-                    {errors.curso && <FieldText
-                            marginTop={8}
-                            fontFamily="regular"
-                            color="red"
-                            size={12}>{errors.curso}</FieldText>}
-                </Container>
-                <Container 
-                    marginTop={12}
-                    marginBottom={12}
-                    marginLeft={50} >
-                    <InputContainer>
-                        <Picker
-                            style={styles.container}
-                            selectedValue={inputs.periodo}
-                            onValueChange={(itemValue) =>
-                                handleOnchange(itemValue, 'periodo')
-                            }>
-                            <Picker.Item label="Periodo" value={false} />
-                            <Picker.Item label="P1" value={1} />
-                            <Picker.Item label="P2" value={2} />
-                            <Picker.Item label="P3" value={3} />
-                        </Picker>
-                    </InputContainer>
-                    {errors.periodo && <FieldText
-                            marginTop={8}
-                            fontFamily="regular"
-                            color="red"
-                            size={12}>{errors.periodo}</FieldText>}
+                    />
+                    <SelectedItens
+                        marginTop={16}
+                        itens={curso}
+                        value={inputs.curso}
+                        filterSelected={'curso'}
+                        onFocus={() => handleError(null, 'curso')}
+                        onChange={handleOnchange}
+                        error={errors.curso}
+                    />
+                    <SelectedItens
+                        marginTop={16}
+                        itens={periodo}
+                        value={inputs.periodo}
+                        filterSelected={'periodo'}
+                        onFocus={() => handleError(null, 'periodo')}
+                        onChange={handleOnchange}
+                        error={errors.periodo}
+                    />
                 </Container>
                 <Container 
                    marginTop={12} 
@@ -183,28 +151,3 @@ export const RegisterProfile = ({ navigation }) => {
         </View>
     )
 }
-
-const InputContainer = styled.View`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: ${({ dir }) => dir || 'row'};
-  width: ${({ theme }) => theme.metrics.px(256)}px;
-  height: ${({ theme }) => theme.metrics.px(42)}px;
-  border-radius: ${({ theme }) => theme.metrics.px(4)};
-  border-width: ${({ theme }) => theme.metrics.px(1)}px;
-  border-color: ${({ theme }) => theme.colors.ocean};
-  padding: ${({ theme }) => theme.metrics.px(6)}px;
-  margin-top: ${({ theme, mt }) => theme.metrics.px(mt || 0)}px;
-  margin-bottom: ${({ theme, mb }) => theme.metrics.px(mb || 0)}px;
-  margin-left: ${({ theme, ml }) => theme.metrics.px(ml || 0)}px;
-  margin-right: ${({ theme, mr }) => theme.metrics.px(mr || 0)}px;
-`
-
-const styles = StyleSheet.create({
-    container: {
-        width: '100%',
-        borderColor: theme.colors.ocean,
-        borderWidth: 5,
-    },
-});

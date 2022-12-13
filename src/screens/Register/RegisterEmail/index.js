@@ -66,7 +66,7 @@ export const RegisterEmail = ({ navigation }) => {
         if (!inputs.telefone) {
             handleError('Por favor insira o numero de telefone', 'telefone')
             isValid = false;
-        } else if (!inputs.telefone.match(/[0-9]/)) {
+        } else if (!inputs.telefone.match(/^[0-9]+$/)) {
             handleError('O telefone deve conter somente numeros', 'telefone')
             isValid = false;
         }
@@ -108,61 +108,35 @@ export const RegisterEmail = ({ navigation }) => {
                     Adicione suas credênciais para continuar
                 </FieldText>
             </Container>
+           
             <Container marginTop={12}
                 align="center">
-
-                <Container marginBottom={16}>
-
                     <Input
-                        onChangeText={text => handleOnchange(text, 'telefone')}
-                        onFocus={() => handleError(null, 'telefone')}
-                        value={inputs.telefone}
-                        placeholder="Telefone"
+                            onChangeText={(text) => handleOnchange(text, 'telefone')}
+                            onFocus={() => handleError(null, 'telefone')}
+                            value={inputs.telefone}
+                            error={errors.telefone}
+                            placeholder="Telefone"
                     />
-                    {errors.telefone && <FieldText
-                        marginTop={8}
-                        fontFamily="regular"
-                        color="red"
-                        size={12}>{errors.telefone}</FieldText>}
-                </Container>
-            </Container>
-            <Container marginTop={12}
-                align="center">
-
-                <Container marginBottom={16}>
-
                     <Input
-                        onChangeText={text => handleOnchange(text, 'email')}
-                        onFocus={() => handleError(null, 'email')}
-                        value={inputs.email}
-                        placeholder="Email"
+                            marginTop={20}
+                            onChangeText={(text) => handleOnchange(text, 'email')}
+                            onFocus={() => handleError(null, 'email')}
+                            value={inputs.email}
+                            error={errors.email}
+                            placeholder="Email"
                     />
-                    {errors.email && <FieldText
-                        marginTop={8}
-                        fontFamily="regular"
-                        color="red"
-                        size={12}>{errors.email}</FieldText>}
-                </Container>
-            </Container>
-            <Container marginTop={12}
-                align="center">
-
-                <Container marginBottom={16}>
                     <Input
-                        onChangeText={text => handleOnchange(text, 'senha')}
-                        onFocus={() => handleError(null, 'senha')}
-                        value={inputs.senha}
-                        placeholder="Senha"
+                            marginTop={20}
+                            onChangeText={text => handleOnchange(text, 'senha')}
+                            onFocus={() => handleError(null, 'senha')}
+                            value={inputs.senha}
+                            error={errors.senha}
+                            placeholder="Senha"
+                            password
                     />
-                    {errors.senha && <FieldText
-                        marginTop={8}
-                        fontFamily="regular"
-                        color="red"
-                        size={12}>{errors.senha}</FieldText>}
-                  
-                </Container>
             </Container>
-            <Container align="center">
+            <Container align="center"  marginTop={20}>
                 <Button onPress={() => validate()}>Proximo</Button>
             </Container>
 
