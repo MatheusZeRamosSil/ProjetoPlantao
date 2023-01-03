@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = new axios.create({
-    baseURL:'https://2d04-179-211-70-8.ngrok.io/api/internos/',
+    baseURL:'https://a6c6-45-168-158-215.ngrok.io/api/internos/',
 })
 
 
